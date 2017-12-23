@@ -28,7 +28,7 @@ class PurchaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity.application as NotesApplication).component.injectInto(this)
-        items = service.retrieveAll().map { ListItem(it) }.toMutableList()
+        items = service.retrieveAll().map { ListItem(it, it.done) }.toMutableList()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,6 +53,9 @@ class PurchaseFragment : Fragment() {
                 items,
                 object : ItemSelectListener<Purchase> {
                     override fun onSelectionChanged(item: ListItem<Purchase>) {
+                        val purchase = item.data
+                        purchase.done = item.selected
+                        service.save(purchase)
                         deleteButton.isEnabled = items.count { it.selected } > 0
                     }
                 },
