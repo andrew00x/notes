@@ -125,5 +125,6 @@ class PurchaseFragment : Fragment() {
     private fun deleteAllItems() {
         service.deleteAll()
         itemsAdapter.clear()
+        deleteButton.isEnabled = false
     }
 }
