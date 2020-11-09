@@ -6,7 +6,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(NotesModule::class))
+@Component(modules = [NotesModule::class])
 interface NotesComponent {
     fun todoService(): TodoService
     fun purchaseService(): PurchaseService

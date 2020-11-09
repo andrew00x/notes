@@ -8,12 +8,12 @@ import com.activeandroid.annotation.Table
 import java.util.*
 
 enum class Period {
-    NONE() {
+    NONE {
         override fun calculateNext(date: Date): Date {
             TODO("nothing to calculate for NONE period")
         }
     },
-    DAY() {
+    DAY {
         override fun calculateNext(date: Date): Date {
             val c = Calendar.getInstance()
             c.time = date
@@ -21,7 +21,7 @@ enum class Period {
             return c.time
         }
     },
-    WEEK() {
+    WEEK {
         override fun calculateNext(date: Date): Date {
             val c = Calendar.getInstance()
             c.time = date
@@ -29,7 +29,7 @@ enum class Period {
             return c.time
         }
     },
-    MONTH() {
+    MONTH {
         override fun calculateNext(date: Date): Date {
             val c = Calendar.getInstance()
             c.time = date

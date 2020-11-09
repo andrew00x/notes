@@ -37,14 +37,14 @@ class PurchaseDialog : DialogFragment() {
 
         return AlertDialog.Builder(activity)
                 .setView(purchaseDialogView)
-                .setPositiveButton(R.string.ok, {_, _ ->
+                .setPositiveButton(R.string.ok) { _, _ ->
                     updatePurchase(title, details)
                     val intent = Intent()
                     intent.putExtra(PURCHASE_ARG, purchase)
                     targetFragment.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
-                })
-                .setNegativeButton(R.string.cancel, {_, _ ->})
-                .create()
+                }
+            .setNegativeButton(R.string.cancel) { _, _ ->}
+            .create()
     }
 
     private fun updateDialog(title: TextView, details: TextView) {

@@ -15,7 +15,7 @@ data class Purchase(
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
-            parcel.readInt() == 0
+            parcel.readInt() == 1
     )
 
     override fun describeContents(): Int {

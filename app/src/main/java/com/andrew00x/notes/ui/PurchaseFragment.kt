@@ -35,17 +35,17 @@ class PurchaseFragment : Fragment() {
         val view = inflater?.inflate(R.layout.fragment_purchases, container, false)!!
 
         val addButton = view.findViewById<View>(R.id.add_purchase)
-        addButton.setOnClickListener { _: View -> openAddPurchaseDialog() }
+        addButton.setOnClickListener { openAddPurchaseDialog() }
 
-        deleteButton = view.findViewById<View>(R.id.delete_purchase)
-        deleteButton.setOnClickListener { _: View -> deleteSelectedItems() }
+        deleteButton = view.findViewById(R.id.delete_purchase)
+        deleteButton.setOnClickListener { deleteSelectedItems() }
         deleteButton.isEnabled = false
 
         val deleteAll = view.findViewById<View>(R.id.clear_all_purchases)
-        deleteAll.setOnClickListener { _: View -> deleteAllItems() }
+        deleteAll.setOnClickListener { deleteAllItems() }
 
         val importBtn = view.findViewById<View>(R.id.import_purchases)
-        importBtn.setOnClickListener { _: View -> openImportPurchasesDialog() }
+        importBtn.setOnClickListener { openImportPurchasesDialog() }
 
         val listView = view.findViewById<ListView>(R.id.purchase_list)
         itemsAdapter = PurchaseList(
@@ -61,7 +61,7 @@ class PurchaseFragment : Fragment() {
                 },
                 object : ItemClickListener<Purchase> {
                     override fun onItemClick(item: ListItem<Purchase>) {
-                        openUpdateTodoDialog(item.data)
+                        openUpdatePurchaseDialog(item.data)
                     }
                 }
         )
@@ -75,7 +75,7 @@ class PurchaseFragment : Fragment() {
         dialog.show(fragmentManager, "purchase_dialog")
     }
 
-    private fun openUpdateTodoDialog(purchase: Purchase) {
+    private fun openUpdatePurchaseDialog(purchase: Purchase) {
         val updateTodoDialog = PurchaseDialog.newInstance(purchase)
         updateTodoDialog.setTargetFragment(this, UPDATE_PURCHASE)
         updateTodoDialog.show(fragmentManager, "purchase_dialog")
@@ -107,7 +107,7 @@ class PurchaseFragment : Fragment() {
                     val purchasesText = data?.getStringExtra(PURCHASE_IMPORT_TEXT)
                     if (purchasesText != null) {
                         val purchases = purchasesParser.parse(purchasesText)
-                        purchases.forEach({ service.save(it) })
+                        purchases.forEach { service.save(it) }
                         itemsAdapter.addAll(purchases.map { ListItem(it) })
                     }
                 }
@@ -117,8 +117,8 @@ class PurchaseFragment : Fragment() {
 
     private fun deleteSelectedItems() {
         val selected = items.filter { it.selected }
-        selected.forEach({ service.delete(it.data) })
-        selected.forEach({ itemsAdapter.remove(it) })
+        selected.forEach { service.delete(it.data) }
+        selected.forEach { itemsAdapter.remove(it) }
         deleteButton.isEnabled = false
     }
 

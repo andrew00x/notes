@@ -11,8 +11,8 @@ import com.andrew00x.notes.R
 import com.andrew00x.notes.Purchase
 
 class PurchaseList(
-        context: Context?,
-        objects: List<ListItem<Purchase>>?,
+        context: Context,
+        objects: List<ListItem<Purchase>>,
         private val itemSelectListener: ItemSelectListener<Purchase>?,
         private val itemClickListener: ItemClickListener<Purchase>? = null
 ) : ArrayAdapter<ListItem<Purchase>>(context, 0, objects) {

@@ -33,14 +33,14 @@ class TodoFragment : Fragment() {
         val view = inflater?.inflate(R.layout.fragment_todo, container, false)!!
 
         val addButton = view.findViewById<View>(R.id.add_todo)
-        addButton.setOnClickListener { _: View -> openAddTodoDialog() }
+        addButton.setOnClickListener { openAddTodoDialog() }
 
-        doneButton = view.findViewById<View>(R.id.done_todo)
-        doneButton.setOnClickListener { _: View -> makeDoneSelectedItems() }
+        doneButton = view.findViewById(R.id.done_todo)
+        doneButton.setOnClickListener { makeDoneSelectedItems() }
         doneButton.isEnabled = false
 
-        deleteButton = view.findViewById<View>(R.id.delete_todo)
-        deleteButton.setOnClickListener { _: View -> deleteSelectedItems() }
+        deleteButton = view.findViewById(R.id.delete_todo)
+        deleteButton.setOnClickListener { deleteSelectedItems() }
         deleteButton.isEnabled = false
 
         val listView = view.findViewById<ListView>(R.id.todo_list)
@@ -101,7 +101,7 @@ class TodoFragment : Fragment() {
     }
 
     private fun makeDoneSelectedItems() {
-        val (forRemove, forUpdate) = items.filter({ it.selected }).partition { it.data.period == Period.NONE }
+        val (forRemove, forUpdate) = items.filter { it.selected }.partition { it.data.period == Period.NONE }
 
         forRemove.forEach { service.delete(it.data) }
         items.removeAll(forRemove)
@@ -120,7 +120,7 @@ class TodoFragment : Fragment() {
 
     private fun deleteSelectedItems() {
         val selected = items.filter { it.selected }
-        selected.forEach({ service.delete(it.data) })
+        selected.forEach { service.delete(it.data) }
         items.removeAll(selected)
         doneButton.isEnabled = false
         deleteButton.isEnabled = false

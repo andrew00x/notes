@@ -16,8 +16,8 @@ private const val WARN_THRESHOLD = 3
 private const val URGENT_THRESHOLD = 1
 
 class TodoList(
-        context: Context?,
-        objects: List<ListItem<Todo>>?,
+        context: Context,
+        objects: List<ListItem<Todo>>,
         private val itemSelectListener: ItemSelectListener<Todo>? = null,
         private val itemClickListener: ItemClickListener<Todo>? = null
 ) : ArrayAdapter<ListItem<Todo>>(context, 0, objects) {

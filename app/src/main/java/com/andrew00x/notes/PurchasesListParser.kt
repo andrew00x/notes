@@ -4,7 +4,7 @@ class PurchasesListParser {
 
     fun parse(str: String): List<Purchase> {
         return str.splitToSequence("\r\n", "\n", "\r", ",")
-                .filter { !it.isEmpty() }
+                .filter { it.isNotEmpty() }
                 .map { createPurchase(it.trim()) }
                 .toList()
     }

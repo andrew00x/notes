@@ -22,7 +22,7 @@ abstract class BaseService<T : Model> {
         Delete().from(myType()).execute<T>()
     }
 
-    abstract protected fun myType(): Class<T>
+    protected abstract fun myType(): Class<T>
 }
 
 class AATodoService : BaseService<Todo>(), TodoService {

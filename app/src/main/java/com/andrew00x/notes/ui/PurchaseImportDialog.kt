@@ -19,12 +19,12 @@ class PurchaseImportDialog : DialogFragment() {
 
         return AlertDialog.Builder(activity, R.style.AppTheme_Dialog_Alert)
                 .setView(purchaseDialogView)
-                .setPositiveButton(R.string.ok, { _, _ ->
-                    val intent = Intent()
-                    intent.putExtra(PURCHASE_IMPORT_TEXT, text.text.toString())
-                    targetFragment.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
-                })
-                .setNegativeButton(R.string.cancel, { _, _ -> })
-                .create()
+                .setPositiveButton(R.string.ok) { _, _ ->
+                  val intent = Intent()
+                  intent.putExtra(PURCHASE_IMPORT_TEXT, text.text.toString())
+                  targetFragment.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
+                }
+            .setNegativeButton(R.string.cancel) { _, _ -> }
+            .create()
     }
 }
